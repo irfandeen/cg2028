@@ -64,7 +64,8 @@ PARK_CAR: 						@ Handle an entry into the car park
 	CMP R6, #SECTION_MAX		@ Compare if exceeded max no.section
 	BGT HANDLE_OVERFLOW			@ If the no.car exceed max, handle overflow
 
-	STR R6, [R3] 				@ Update result for current section
+	STR R6, [R3] 				@ No overflow, Update result for current section
+	STR R6, [R0]				@ And update the current section
 	BX LR						@ Return to the ENTRY_LOOP
 
 
