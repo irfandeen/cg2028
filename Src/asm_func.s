@@ -53,8 +53,8 @@ ENTRY_LOOP:
 	BL PARK_CAR					@ Call the PARK_CAR function
 	ADD R4, #1					@ Each call of PARK_CAR function should handle one entry
 	CMP R4, #NUM_ENTRY			@ Check if all entry has been parked
-	IT LT						@ If not all entry parked loop back
-		BLT ENTRY_LOOP
+	BLT ENTRY_LOOP				@ If not all entry parked loop back
+		
 	B EXIT_LOOP					@ Handle the exit
 
 
@@ -87,8 +87,8 @@ EXIT_LOOP:
 	ADD R2, #4					@ Move to next section for exit array
 	ADD R8, #1					@ Increment the count for the number of loops completed
 	CMP R8, R7					@ Compare current number of loop completed
-	IT NE						@ If not equal:
-		BNE EXIT_LOOP			@ Restart from beginning
 
+	BNE EXIT_LOOP				@ If not equal, restart from beginning
+	
 POP {LR} 						@ Return to C program
 BX LR
